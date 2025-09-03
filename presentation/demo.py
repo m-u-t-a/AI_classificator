@@ -6,6 +6,7 @@ from extractor import extract_fields
 from pdf_extractor import extract_text_from_pdf
 from typing import Dict
 
+# Чисто для наглядности
 def format_appeal(data: Dict) -> str:
     return f"""
 <div style='font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto;'>
