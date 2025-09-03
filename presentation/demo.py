@@ -1,7 +1,7 @@
 import gradio as gr
 from gradio_pdf import PDF
 
-from definer import define_fields, define_category
+from definer import define_fields
 from extractor import extract_fields
 from pdf_extractor import extract_text_from_pdf
 from typing import Dict
@@ -56,7 +56,7 @@ def format_appeal(data: Dict) -> str:
 
     <div style='background-color: #f8f9fa; padding: 15px; border-left: 4px solid #4e73df; margin-bottom: 20px;'>
         <h3 style='color: #2b5876; margin-top: 0;'>КЛАССИФИКАЦИЯ</h3>
-        <p style='white-space: pre-line;'>{define_category(data['текст_обращения'])}</p>
+        <p style='white-space: pre-line;'>{data['категория_обращения']}</p>
     </div>
 </div>
 """
