@@ -3,7 +3,8 @@ import pytesseract
 from PIL import Image
 import io
 import json
-
+import os
+import re
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
@@ -36,7 +37,7 @@ def extract_text_from_pdf(pdf_path, use_ocr=True, dpi=300):
     return full_text
 
 
-def save_to_json(all_texts, output_file="documents.json"):
+def save_to_json(all_texts, output_file):
 
     data = {
         "metadata": {
@@ -45,22 +46,23 @@ def save_to_json(all_texts, output_file="documents.json"):
         "documents": []
     }
 
-    for filename in all_texts:
-        text = all_texts[filename]
+    for id in all_texts:
+        text = all_texts[id]
         data["documents"].append({
-            "filename": filename,
-            "text": text,
-            "pages": text.count('--- Страница')
+            "id": id,
+            "text": text
         })
 
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
+pattern = r'\{([^}]*)\}'
+texts = {}
 
-for i in range(1):
-    path = '../resources/115-31.pdf'
-    texts = {}
-    text = extract_text_from_pdf(path)
-    name = path
-    texts[name] = text
-    save_to_json(texts)
+for root, dirs, files in os.walk('C:/Users/USER/Обращение январь 2025'):
+    for name in files:
+        id = re.findall(pattern, root)[0]
+        text = extract_text_from_pdf(root + "\\" + name)
+        texts[id] = text
+
+save_to_json(texts, "documents.json")
