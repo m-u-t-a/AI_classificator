@@ -6,7 +6,7 @@ import json
 import os
 import re
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r'D:\tesseract\tesseract.exe'
 
 def extract_text_from_pdf(pdf_path, use_ocr=True, dpi=300):
     doc = fitz.open(pdf_path)
@@ -59,10 +59,11 @@ def save_to_json(all_texts, output_file):
 pattern = r'\{([^}]*)\}'
 texts = {}
 
-for root, dirs, files in os.walk('C:/Users/USER/Обращение январь 2025'):
+for root, dirs, files in os.walk('D:/Обращения/Appeals'):
     for name in files:
         id = re.findall(pattern, root)[0]
+        print(id)
         text = extract_text_from_pdf(root + "\\" + name)
         texts[id] = text
 
-save_to_json(texts, "documents.json")
+save_to_json(texts, "../jsons_with_info/appeals_texts.json")
