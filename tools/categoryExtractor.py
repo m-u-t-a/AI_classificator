@@ -17,7 +17,7 @@ def category_extractor(pdf_path):
                     if re.match(regex, span['text']) and span['text'][-1] != '0':
                         if key:
                             value = value[1:]
-                            result[value] = key
+                            result[key] = value
                             value = ''
                         key = span['text']
                         flag = True
@@ -27,10 +27,8 @@ def category_extractor(pdf_path):
                     elif span['origin'][0] == 76.69998168945312:
                         if key:
                             value = value[1:]
-                            result[value] = key
+                            result[key] = value
                             value = ''
                             key = None
                             flag = False
     return result
-
-print(category_extractor('../categories.pdf'))

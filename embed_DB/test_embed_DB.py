@@ -22,13 +22,5 @@ chroma_db = Chroma(
 
 results = chroma_db.similarity_search(
             query = "проведите газ пожалуйста в поселок Мымры",
-            k = 10
+            k = 5
         )
-
-context = []
-
-for doc in results:
-    text_only = doc.page_content
-    context.append(text_only)
-
-print(context)

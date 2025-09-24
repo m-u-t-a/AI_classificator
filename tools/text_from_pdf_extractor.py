@@ -59,7 +59,7 @@ def save_to_json(all_texts, output_file):
 pattern = r'\{([^}]*)\}'
 texts = {}
 
-for root, dirs, files in os.walk('D:/Обращения/Appeals'):
+for root, dirs, files in os.walk('D:/Обращения/Category_test'):
     for name in files:
         id = re.findall(pattern, root)[0]
         print(id)
